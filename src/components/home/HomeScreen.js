@@ -1,32 +1,33 @@
 import React from 'react'
-import { ContentCenter } from '../home/ContentCenter';
-import { ContentLeft } from '../home/ContentLeft';
 import { ContentRigth } from '../home/ContentRigth';
 import { useDispatch, useSelector } from 'react-redux';
 import { starLoadingTemas } from '../../actions/temas';
+import { useHistory } from 'react-router';
+import { ListaOrdenScreen } from '../ordenes/ListaOrdenScreen';
+
 import './HomeScreen.css'
 
 export const HomeScreen = () => {
 	const dispatch =useDispatch();
+    const history = useHistory();
     const {isLogged}  = useSelector( state => state.auth );    
 
     dispatch( starLoadingTemas(20));
 
+    const addOrden = () =>{
+        history.push("/addOrden");
+    }
+
     return (
         <>
-        <div className="p-4 bg-light">
-        <div className="row mb-3">
-            <div className="col-sm-2 ocultar-div">
-                <ContentLeft isLogged={isLogged} />
-            </div>
-            <div className="col-sm-8">
-                <h1 className="display-6 text-center">Últimos temas</h1>
-                <ContentCenter />
-            </div>
-            <div className="col-sm-2">
-                <ContentRigth isLogged={isLogged} />
-            </div>
+        <div className='container'>
+        <div className="d-grid gap-2">
+            <button className="btn btn-primary" type="button" onClick={addOrden} ><i className="bi bi-plus-circle"> Crear Orden</i></button>
         </div>
+        <hr />
+            <ListaOrdenScreen  />
+        <hr />
+            <ContentRigth isLogged={isLogged} />
         </div>
     </>
     )

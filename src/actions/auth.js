@@ -14,7 +14,7 @@ export const startLoginEmailPassword = (email, password) => {
                         .then( async ({ user }) => {
 
                                 Swal.fire({
-                                        title: '<div class="text-center" role="status"> <img className="mb-2 bg-primary " src="../../assets/image/Comp_14.gif" alt="" width="50%"  /></div>',
+                                        title: '<div className="text-center" role="status"> <img className="mb-2 bg-primary " src="../../assets/image/Comp_14.gif" alt="" width="50%"  /></div>',
                                         text: 'Espere un momento.',
                                         showConfirmButton: false,
                                         allowOutsideClick: false,
@@ -24,7 +24,7 @@ export const startLoginEmailPassword = (email, password) => {
                                       });       
 
                         // Create a reference to the cities collection
-                        const userRef = db.collection(`${user.uid}/chiletraders/usuario`);
+                        const userRef = db.collection(`gafa/usuario/${user.uid}`);
                         // Create a query against the collection
                         const queryRef = await userRef.where('email', '==', user.email).get();
 
@@ -73,7 +73,7 @@ export const startGoogleLogin = () => {
                         .then( async ({ user }) => {
                                 
                                 Swal.fire({
-                                        title: '<div class="text-center" role="status"> <img className="mb-2 bg-primary " src="../../assets/image/Comp_14.gif" alt="" width="50%"  /></div>',
+                                        title: '<div className="text-center" role="status"> <img className="mb-2 bg-primary " src="../../assets/image/Comp_14.gif" alt="" width="50%"  /></div>',
                                         text: 'Espere un momento.',
                                         showConfirmButton: false,
                                         allowOutsideClick: false,
@@ -83,7 +83,7 @@ export const startGoogleLogin = () => {
                                       });
 
                                 // Create a reference to the cities collection
-                                const userRef = db.collection(`${user.uid}/chiletraders/usuario`);
+                                const userRef = db.collection(`gafa/usuario/${user.uid}`);
                                 // Create a query against the collection
                                 const queryRef = await userRef.where('email', '==', user.email).get();
 
@@ -102,8 +102,8 @@ export const startGoogleLogin = () => {
                                                 dateModify: new Date().getTime(),
                                                                                 
                                         }
-
-                                        db.collection(`${user.uid}/chiletraders/usuario`).add(usuario);         
+                                        db.collection(`gafa/usuario/${user.uid}`).add(usuario);                                        
+       
 
                                 }else{
                                         queryRef.forEach(doc => {
@@ -149,7 +149,7 @@ export const startRegisterEmailPassword = (email, password, name) => {
 
 
                                 // Create a reference to the cities collection
-                                const userRef = db.collection(`${user.uid}/chiletraders/usuario`);
+                                const userRef = db.collection(`gafa/usuario/${user.uid}`);
                                 // Create a query against the collection
 
                                 const queryRef = await userRef.where('email', '==', user.email).get();
@@ -169,7 +169,7 @@ export const startRegisterEmailPassword = (email, password, name) => {
                                                                                 
                                         }
 
-                                        db.collection(`${user.uid}/chiletraders/usuario`).add(usuario);                                        
+                                        db.collection(`gafa/usuario/${user.uid}`).add(usuario);                                        
 
 
                                 }
@@ -198,16 +198,16 @@ export const startRecuperarPass = (email) => {
                 firebase.auth().sendPasswordResetEmail(email)
                         .then(function() {
                                 Swal.fire(`
-                                        <div class="alert alert-primary" role="alert">
-                                                        <i class="bi bi-check2"></i> 
+                                        <div className="alert alert-primary" role="alert">
+                                                        <i className="bi bi-check2"></i> 
                                                         Se ha enviado un correo electrónico a su cuenta ${email}, siga los pasos indicados.
                                         </div>
                                 `)                                
                         })
                         .catch(function(error) {
                                 Swal.fire(`
-                                        <div class="alert alert-danger" role="alert">
-                                                <i class="bi bi-exclamation-octagon-fill"></i> Error : ${error}
+                                        <div className="alert alert-danger" role="alert">
+                                                <i className="bi bi-exclamation-octagon-fill"></i> Error : ${error}
                                         </div>
                                 `)                                  
                                 console.log(error);
